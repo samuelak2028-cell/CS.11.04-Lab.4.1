@@ -60,24 +60,28 @@ public class Main {
     //4.1 decipherWord
     public static String decipherWord (String input) {
         String number = "";
-        int numberOfNumbers = 0;
         for (int i = 0;i<input.length();i++) {
             if (Character.isDigit(input.charAt(i))) {
                 number += input.charAt(i);
-                numberOfNumbers = numberOfNumbers + 1;
             } else {
                 break;
             }
         }
+        String removedFirstLetter = input.substring(number.length());
+        int lastChar = removedFirstLetter.length()-1;
         int ascii = Integer.parseInt (number);
-        char firstLetter = (char) ascii;
-        if (numberOfNumbers = 1) {
-            return firstLetter;
+        String firstLetterString = Character.toString((char)ascii);
+        if (number.length() == input.length()) {
+            return firstLetterString;
         }
-        if (numberOfNumbers = 2) {
-            return firstLetter + input.charAt(1);
+        if (number.length() == input.length()-1) {
+            return firstLetterString + removedFirstLetter.charAt(0);
         }
-
+        if (number.length() == input.length()-2) {
+            return firstLetterString + removedFirstLetter.charAt(lastChar) + removedFirstLetter.charAt(0);
+        } else {
+            return firstLetterString + removedFirstLetter.charAt(lastChar) + removedFirstLetter.substring(1,lastChar) + removedFirstLetter.charAt(0);
+        }
     }
     // 4. decipherThis
     public static String decipherThis(String input) {
